@@ -2,7 +2,7 @@ import express, { Application } from 'express';
 import { Server } from 'socket.io';
 import { createAdapter } from '@socket.io/redis-adapter';
 import { createServer } from 'http';
-import { createClient } from 'redis';
+import { initRedis } from './redis';
 import dotenv from 'dotenv';
 
 
@@ -17,6 +17,8 @@ async function initServer() {
   // const pubClient = await createClient();
   // const subClient = pubClient.duplicate();
   // , {adapter: createAdapter(pubClient, subClient)}
+  await initRedis()
+
   const io = new Server(server, {
     cors: {
       origin: '*',
