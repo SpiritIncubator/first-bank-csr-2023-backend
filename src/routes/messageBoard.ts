@@ -1,5 +1,6 @@
 import express from 'express';
 import { redisClient } from '../redis';
+import updateSpreadSheet from '../utils/updateSpreadSheet';
 const router = express.Router();
 
 router.get('/', async (req, res) => {
@@ -47,5 +48,10 @@ router.post('/', async (req, res) => {
     res.status(400).json({ success: false, message: 'Name and message are required.' });
   }
 });
+
+router.post('/updateSheet', async (req, res) => {
+  updateSpreadSheet()
+  res.status(200).json({ success: true, message: 'Message stored successfully.' });
+})
 
 export default router;
