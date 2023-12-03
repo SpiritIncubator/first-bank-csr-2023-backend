@@ -1,8 +1,11 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { JWT } from 'google-auth-library';
+import { MESSAGE_SHEET_ID, MESSAGE_SHEET_TITLE } from '../constants';
 
-export default async function updateSpreadSheet(){
-  console.log('process.env.GOOGLE_PRIVATE_KEY :', process.env.GOOGLE_PRIVATE_KEY);
+export default async function updateSpreadSheet(
+  name: string,
+  message: string,
+  keepTop: boolean = false) {
 
   // Initialize auth - see https://theoephraim.github.io/node-google-spreadsheet/#/guides/authentication
   const serviceAccountAuth = new JWT({
@@ -15,17 +18,21 @@ export default async function updateSpreadSheet(){
     ],
   });
 
-  const doc = new GoogleSpreadsheet('1WojvSlM7Ldgc8JgFUw2M39mHEczgV7qilRK7eo5jqEU', serviceAccountAuth);
+  const doc = new GoogleSpreadsheet(MESSAGE_SHEET_ID, serviceAccountAuth);
 
   await doc.loadInfo(); // loads document properties and worksheets
-  console.log('doc info',doc.title);
-  await doc.updateProperties({ title: 'renamed doc' });
+  // console.log('doc info',doc.title);
+  // await doc.updateProperties({ title: 'renamed doc' });
 
-  const sheet = doc.sheetsByIndex[0]; // or use `doc.sheetsById[id]` or `doc.sheetsByTitle[title]`
-  console.log(sheet.title);
-  console.log(sheet.rowCount);
+  if (!doc.sheetsByTitle[MESSAGE_SHEET_TITLE]) {
+    await doc.addSheet({
+      title: MESSAGE_SHEET_TITLE,
+      headerValues: ['name', 'message', 'keepTop']
+    });
+  }
 
-  // adding / removing sheets
-  const newSheet = await doc.addSheet({ title: 'another sheet' });
-  await newSheet.delete();
+  const targetSheet = doc.sheetsByTitle[MESSAGE_SHEET_TITLE]
+
+  // const rows = await sheet.getRows(); // can pass in { limit, offset }
+  await targetSheet.addRow({ name, message, keepTop: keepTop ? 'v' : '' });
 }
