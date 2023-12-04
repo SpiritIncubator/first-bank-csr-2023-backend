@@ -5,17 +5,26 @@ const router = express.Router();
 
 
 router.get('/messages', async (req, res) => {
-  console.time('message api')
-  const messageList = await getMessageListFromSheet()
-  console.timeEnd('message api')
-  res.status(200).json(messageList);
+  try {
+    const messageList = await getMessageListFromSheet()
+    console.timeEnd('message api')
+    res.status(200).json(messageList);
+  } catch (error) {
+    console.log('error :', error);
+    res.status(500).json({ success: false, message: 'Error when retrieving messages.' });
+  }
 })
 
 router.post('/createMessage', async (req, res) => {
-  const { name, message, keepTop } = req.body;
-  await updateSpreadSheet(name, message, keepTop)
+  const { name, message, color = '', keepTop = false } = req.body;
+  try {
+    await updateSpreadSheet(name, message, color, keepTop)
+    res.status(200).json({ success: true, message: 'Message stored successfully.' });
+  } catch (error) {
+    console.log('error :', error);
+    res.status(500).json({ success: false, message: 'Error when storing the message.' });
+  }
 
-  res.status(200).json({ success: true, message: 'Message stored successfully.' });
 })
 
 

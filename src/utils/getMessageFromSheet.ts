@@ -6,6 +6,7 @@ import { MESSAGE_SHEET_ID, MESSAGE_SHEET_TITLE } from '../constants';
 type MessagesRowData = {
   name: string;
   message: string;
+  color?: string;
   keepTop?: boolean;
 };
 
@@ -30,7 +31,9 @@ export default async function getMessageListFromSheet() {
   for (let i = 0; i < rows.length; i++) {
     messages.push({
       name: rows[i].get('name'),
-      message: rows[i].get('message')
+      message: rows[i].get('message'),
+      color: rows[i].get('color'),
+      keepTop: rows[i].get('keepTop')
     })
   }
   return messages

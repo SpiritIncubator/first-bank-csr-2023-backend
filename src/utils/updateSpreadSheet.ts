@@ -5,6 +5,7 @@ import { MESSAGE_SHEET_ID, MESSAGE_SHEET_TITLE } from '../constants';
 export default async function updateSpreadSheet(
   name: string,
   message: string,
+  color: string,
   keepTop: boolean = false) {
 
   // Initialize auth - see https://theoephraim.github.io/node-google-spreadsheet/#/guides/authentication
@@ -27,12 +28,12 @@ export default async function updateSpreadSheet(
   if (!doc.sheetsByTitle[MESSAGE_SHEET_TITLE]) {
     await doc.addSheet({
       title: MESSAGE_SHEET_TITLE,
-      headerValues: ['name', 'message', 'keepTop']
+      headerValues: ['name', 'message', 'color', 'keepTop']
     });
   }
 
   const targetSheet = doc.sheetsByTitle[MESSAGE_SHEET_TITLE]
 
   // const rows = await sheet.getRows(); // can pass in { limit, offset }
-  await targetSheet.addRow({ name, message, keepTop: keepTop ? 'v' : '' });
+  await targetSheet.addRow({ name, message, color, keepTop: keepTop ? 'v' : '' });
 }
