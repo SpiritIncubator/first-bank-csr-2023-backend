@@ -4,6 +4,6 @@ import messageBoard from './messageBoard';
 
 const router = Router();
 
-router.use('/subscribe', messageBoard);
+router.use('/messageBoard', messageBoard);
 
 export default router;
