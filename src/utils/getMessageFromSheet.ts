@@ -33,7 +33,7 @@ export default async function getMessageListFromSheet() {
       name: rows[i].get('name'),
       message: rows[i].get('message'),
       color: rows[i].get('color'),
-      keepTop: rows[i].get('keepTop')
+      keepTop: !!rows[i].get('keepTop') ? true : false,
     })
   }
   return messages
