@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import cors, { CorsOptions } from 'cors'
 
-var whitelist = ['http://localhost:3010']
+var whitelist = ['http://localhost:3000']
 const corsOptions: CorsOptions = {
   origin: (origin, callback) => {
     console.log('origin :', origin);
