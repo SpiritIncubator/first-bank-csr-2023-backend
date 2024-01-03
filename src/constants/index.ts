@@ -1,2 +1,2 @@
-export const MESSAGE_SHEET_ID = '1WojvSlM7Ldgc8JgFUw2M39mHEczgV7qilRK7eo5jqEU'
+export const MESSAGE_SHEET_ID = '1K1gd3kVlPaOiVHiFnTTNbiM1wpl-gkCl20z3jBR0itU'
 export const MESSAGE_SHEET_TITLE = 'MESSAGE_BOARD'
