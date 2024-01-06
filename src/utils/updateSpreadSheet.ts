@@ -36,6 +36,7 @@ export default async function updateSpreadSheet(
 
   const targetSheet = doc.sheetsByTitle[MESSAGE_SHEET_TITLE]
 
-  // const rows = await sheet.getRows(); // can pass in { limit, offset }
+  const rows = await targetSheet.getRows({ limit: 1 }); // can pass in { limit, offset }
+  console.log('rows :', rows);
   await targetSheet.addRow({ name, message, color, keepTop: keepTop ? 'v' : '' });
 }
