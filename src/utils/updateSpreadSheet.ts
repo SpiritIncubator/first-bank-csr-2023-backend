@@ -1,7 +1,6 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { JWT } from 'google-auth-library';
 import { MESSAGE_SHEET_ID, MESSAGE_SHEET_TITLE } from '../constants';
-import removeQuotes from './removeQuotes';
 
 
 export default async function updateSpreadSheet(
