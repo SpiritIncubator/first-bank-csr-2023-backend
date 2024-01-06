@@ -9,8 +9,8 @@ export default async function updateSpreadSheet(
   message: string,
   color: string,
   keepTop: boolean = false) {
-  console.log('GOOGLE_SERVICE_ACCOUNT_EMAIL ', process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL);
-  console.log('GOOGLE_PRIVATE_KEY', process.env.GOOGLE_PRIVATE_KEY);
+  console.log('GOOGLE_SERVICE_ACCOUNT_EMAIL ', removeQuotes(process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || ''));
+  console.log('GOOGLE_PRIVATE_KEY', removeQuotes(process.env.GOOGLE_PRIVATE_KEY || ''));
 
   // Initialize auth - see https://theoephraim.github.io/node-google-spreadsheet/#/guides/authentication
   const serviceAccountAuth = new JWT({
