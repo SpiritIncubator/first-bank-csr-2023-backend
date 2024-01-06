@@ -12,8 +12,8 @@ type MessagesRowData = {
 
 export default async function getMessageListFromSheet() {
   const serviceAccountAuth = new JWT({
-    email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    key: process.env.GOOGLE_PRIVATE_KEY,
+    email: JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || ''),
+    key: JSON.parse(process.env.GOOGLE_PRIVATE_KEY || ''),
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
   });
 
