@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import cors, { CorsOptions } from 'cors'
 
-var whitelist = ['http://localhost:3000']
+var whitelist = ['http://localhost:3000', 'https://first-bank-csr-2023-client.vercel.app']
 const corsOptions: CorsOptions = {
   origin: (origin, callback) => {
     console.log('origin :', origin);
