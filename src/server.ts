@@ -40,6 +40,7 @@ async function initServer() {
   });
 
   app.use(bodyParser.urlencoded({ extended: false }))
+  app.use(express.json());
   app.use(cors(corsOptions));
   app.use('/api/v1', router);
 
