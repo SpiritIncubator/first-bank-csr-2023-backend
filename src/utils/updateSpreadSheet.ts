@@ -24,7 +24,7 @@ export default async function updateSpreadSheet(
   const doc = new GoogleSpreadsheet(MESSAGE_SHEET_ID, serviceAccountAuth);
 
   await doc.loadInfo(); // loads document properties and worksheets
-  // console.log('doc info',doc.title);
+  console.log('doc info', doc.title);
   // await doc.updateProperties({ title: 'renamed doc' });
 
   if (!doc.sheetsByTitle[MESSAGE_SHEET_TITLE]) {
