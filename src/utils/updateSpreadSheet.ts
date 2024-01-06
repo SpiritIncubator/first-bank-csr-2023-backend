@@ -39,4 +39,7 @@ export default async function updateSpreadSheet(
   const rows = await targetSheet.getRows({ limit: 1 }); // can pass in { limit, offset }
   console.log('rows :', rows);
   await targetSheet.addRow({ name, message, color, keepTop: keepTop ? 'v' : '' });
+  console.log('color :', color);
+  console.log('message :', message);
+  console.log('name :', name);
 }
