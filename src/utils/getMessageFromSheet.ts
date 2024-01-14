@@ -3,6 +3,7 @@ import { JWT } from 'google-auth-library';
 import { MESSAGE_SHEET_ID, MESSAGE_SHEET_TITLE } from '../constants';
 
 
+
 type MessagesRowData = {
   name: string;
   message: string;
@@ -11,9 +12,11 @@ type MessagesRowData = {
 };
 
 export default async function getMessageListFromSheet() {
+
+  const IS_LOCAL = process.env.ENV === 'local';
   const serviceAccountAuth = new JWT({
-    email: JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || ''),
-    key: JSON.parse(process.env.GOOGLE_PRIVATE_KEY || ''),
+    email: IS_LOCAL ? process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL : JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || ''),
+    key: IS_LOCAL ? process.env.GOOGLE_PRIVATE_KEY : JSON.parse(process.env.GOOGLE_PRIVATE_KEY || ''),
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
   });
 
